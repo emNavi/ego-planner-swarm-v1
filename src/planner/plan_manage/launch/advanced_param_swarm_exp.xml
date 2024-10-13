@@ -36,9 +36,6 @@
   <arg name="point5_x"/>
   <arg name="point5_y"/>
   <arg name="point5_z"/>
-  <arg name="point6_x"/>
-  <arg name="point6_y"/>
-  <arg name="point6_z"/>
 
   <arg name="flight_type"/>
   <arg name="use_distinctive_trajs"/>
@@ -94,10 +91,6 @@
     <param name="fsm/waypoint5_x" value="$(arg point5_x)" type="double"/>
     <param name="fsm/waypoint5_y" value="$(arg point5_y)" type="double"/>
     <param name="fsm/waypoint5_z" value="$(arg point5_z)" type="double"/>
-    <param name="fsm/waypoint6_x" value="$(arg point6_x)" type="double"/>
-    <param name="fsm/waypoint6_y" value="$(arg point6_y)" type="double"/>
-    <param name="fsm/waypoint6_z" value="$(arg point6_z)" type="double"/>
-
     
     <param name="grid_map/resolution"      value="0.10" /> 
     <param name="grid_map/map_size_x"   value="$(arg map_size_x_)" /> 

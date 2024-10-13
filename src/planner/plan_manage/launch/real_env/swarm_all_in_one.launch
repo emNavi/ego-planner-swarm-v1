@@ -11,6 +11,14 @@
     <!-- number of moving objects -->
     <arg name="obj_num" value="10" />
 
+    <!-- 1: use 2D Nav Goal to select goal  -->
+    <!-- 2: use global waypoints below  -->
+    <!-- 4: use REMOTE_TARGET  -->
+    <!-- 5: use REMOTE_START  -->
+    <arg name="flight_type" default="4" />
+    <arg name="max_vel" default="1" />
+    <arg name="max_acc" default="1" />
+
   <include file="$(find ego_planner)/launch/advanced_param_swarm_exp.xml">
 
     <arg name="drone_id" value="$(arg drone_id)"/>
@@ -38,8 +46,8 @@
     <arg name="fy" value="387.229248046875"/>
 
     <!-- maximum velocity and acceleration the drone will reach -->
-    <arg name="max_vel" value="3" />
-    <arg name="max_acc" value="3.5" />
+    <arg name="max_vel" value="$(arg max_vel)" />
+    <arg name="max_acc" value="$(arg max_acc)" />
 
     <!--always set to 1.5 times grater than sensing horizen-->
     <arg name="planning_horizon" value="7.5" /> 
@@ -50,14 +58,14 @@
     <!-- 2: use global waypoints below  -->
     <!-- 4: use REMOTE_TARGET  -->
     <!-- 5: use REMOTE_START  -->
-
-    
-    <arg name="flight_type" value="5" />
+    <arg name="flight_type" value="$(arg flight_type)" />
     
     <!-- global waypoints -->
     <!-- It generates a piecewise min-snap traj passing all waypoints -->
+    <!-- 预设目标点数 -->
     <arg name="point_num" value="5" />
 
+    <!-- 目标点为相对里程计初始化点的x、y、z坐标，单位 m -->
     <arg name="point0_x" value="5.0" />
     <arg name="point0_y" value="0.0" />
     <arg name="point0_z" value="1.0" />
@@ -81,10 +89,6 @@
     <arg name="point5_x" value="5.0" />
     <arg name="point5_y" value="0.0" />
     <arg name="point5_z" value="1.0" />
-
-    <arg name="point6_x" value="0.0" />
-    <arg name="point6_y" value="0.0" />
-    <arg name="point6_z" value="1.0" />
 
   </include>
 
