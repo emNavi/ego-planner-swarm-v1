@@ -115,7 +115,7 @@ void GridMap::initMap(ros::NodeHandle &nh)
   extrinsic_sub_ = node_.subscribe<nav_msgs::Odometry>(
       "/vins_fusion/extrinsic", 10, &GridMap::extrinsicCallback, this); // sub
 // TODO:hyaline
-#ifndef USE_MY_CLOUD
+#ifndef USE_MID360_CLOUD
   depth_sub_.reset(new message_filters::Subscriber<sensor_msgs::Image>(node_, "grid_map/depth", 50));
 
   if (mp_.pose_type_ == POSE_STAMPED)
@@ -139,7 +139,7 @@ void GridMap::initMap(ros::NodeHandle &nh)
     sync_image_odom_->registerCallback(boost::bind(&GridMap::depthOdomCallback, this, _1, _2));
   }
 #endif
-#ifdef USE_MY_CLOUD
+#ifdef USE_MID360_CLOUD
   ROS_INFO("before Subscriber");
   // ros::Duration(2.0).sleep();
 
@@ -386,12 +386,12 @@ void GridMap::raycastProcess()
   RayCaster raycaster;
   Eigen::Vector3d half = Eigen::Vector3d(0.5, 0.5, 0.5);
   Eigen::Vector3d ray_pt, pt_w;
-#ifndef USE_MY_CLOUD
+#ifndef USE_MID360_CLOUD
   for (int i = 0; i < md_.proj_points_cnt; ++i)
   {
     pt_w = md_.proj_points_[i];
 #endif
-#ifdef USE_MY_CLOUD
+#ifdef USE_MID360_CLOUD
     int times_test = 0;
     int times_save = md_.proj_points_cnt;
 
@@ -721,7 +721,7 @@ void GridMap::raycastProcess()
     /* update occupancy */
     ros::Time t1, t2, t3, t4;
     t1 = ros::Time::now();
-#ifndef USE_MY_CLOUD
+#ifndef USE_MID360_CLOUD
     projectDepthImage();
 #endif
     t2 = ros::Time::now();
@@ -1069,7 +1069,7 @@ void GridMap::raycastProcess()
     md_.occ_need_update_ = true;
     md_.flag_use_depth_fusion = true;
   }
-#ifdef USE_MY_CLOUD
+#ifdef USE_MID360_CLOUD
   // TODO:Hyaline
   void GridMap::cloudOdomCallback(const sensor_msgs::PointCloud2ConstPtr &cloud,
                                   const nav_msgs::OdometryConstPtr &odom)

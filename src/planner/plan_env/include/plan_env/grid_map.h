@@ -119,7 +119,7 @@ struct MappingData {
 
   vector<Eigen::Vector3d> proj_points_;
   // TODO:hyaline
-  // #ifdef USE_MY_CLOUD
+  // #ifdef USE_MID360_CLOUD
   vector<Eigen::Vector3d> my_cloud_points_;
   // #endif
   int proj_points_cnt;
@@ -203,7 +203,7 @@ private:
   void depthOdomCallback(const sensor_msgs::ImageConstPtr& img, const nav_msgs::OdometryConstPtr& odom);
   void cloudCallback(const sensor_msgs::PointCloud2ConstPtr& img);
   void odomCallback(const nav_msgs::OdometryConstPtr& odom);
-  // #ifdef USE_MY_CLOUD
+  // #ifdef USE_MID360_CLOUD
   // TODO:Hyaline
   void cloudOdomCallback(const sensor_msgs::PointCloud2ConstPtr &cloud,
                                   const nav_msgs::OdometryConstPtr &odom);
@@ -225,11 +225,11 @@ private:
   // nav_msgs::Odometry> SyncPolicyImageOdom; typedef
   // message_filters::sync_policies::ExactTime<sensor_msgs::Image,
   // geometry_msgs::PoseStamped> SyncPolicyImagePose;
-  #ifndef USE_MY_CLOUD
+  #ifndef USE_MID360_CLOUD
   typedef message_filters::sync_policies::ApproximateTime<sensor_msgs::Image, nav_msgs::Odometry>
       SyncPolicyImageOdom;
   #endif    
-  #ifdef USE_MY_CLOUD
+  #ifdef USE_MID360_CLOUD
   typedef message_filters::sync_policies::ApproximateTime<sensor_msgs::PointCloud2, nav_msgs::Odometry>
       SyncPolicyImageOdom;
   #endif    
@@ -239,10 +239,10 @@ private:
   typedef shared_ptr<message_filters::Synchronizer<SyncPolicyImageOdom>> SynchronizerImageOdom;
 
   ros::NodeHandle node_;
-  #ifndef USE_MY_CLOUD
+  #ifndef USE_MID360_CLOUD
   shared_ptr<message_filters::Subscriber<sensor_msgs::Image>> depth_sub_;
   #endif
-  #ifdef USE_MY_CLOUD
+  #ifdef USE_MID360_CLOUD
   shared_ptr<message_filters::Subscriber<sensor_msgs::PointCloud2>> depth_sub_;
   #endif
   shared_ptr<message_filters::Subscriber<geometry_msgs::PoseStamped>> pose_sub_;

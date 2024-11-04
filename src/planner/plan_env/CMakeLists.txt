@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(plan_env)
-# add_compile_definitions(USE_MY_CLOUD)
+# 使用 MID360 作为点云输入（默认未启用）
+# add_compile_definitions(USE_MID360_CLOUD)
 
 set(CMAKE_BUILD_TYPE "Release")
 ADD_COMPILE_OPTIONS(-std=c++11 )
@@ -8,7 +9,6 @@ ADD_COMPILE_OPTIONS(-std=c++14 )
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -g")
 
 find_package(OpenCV REQUIRED)
-
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
