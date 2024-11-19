@@ -25,8 +25,6 @@ if [ $? -eq 0 ]
 then
     source ${PROJECT_DIR}/devel/setup.bash;roslaunch ego_planner swarm_all_in_one.launch \
     drone_id:=$drone_id cx:=$cx cy:=$cy fx:=$fx fy:=$fy flight_type:=$flight_type max_vel:=$max_vel max_acc:=$max_acc && sleep 1;
-    # gnome-terminal -- bash -c "source ${PROJECT_DIR}/devel/setup.bash;roslaunch ego_planner swarm_all_in_one.launch \
-    # drone_id:=$drone_id cx:=$cx cy:=$cy fx:=$fx fy:=$fy flight_type:=$flight_type max_vel:=$max_vel max_acc:=$max_acc" && sleep 1;
 else
     echo error
 fi
